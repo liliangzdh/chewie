@@ -84,6 +84,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               Icon(
                 Icons.chevron_left,
                 color: Colors.white,
+                size: 30,
               ),
               Text(
                 '返回',
@@ -174,6 +175,7 @@ class _MaterialControlsState extends State<MaterialControls> {
               chewieController.isFullScreen
                   ? Icons.fullscreen_exit
                   : Icons.fullscreen,
+              color: Colors.white,
             ),
           ),
         ),
@@ -250,6 +252,7 @@ class _MaterialControlsState extends State<MaterialControls> {
                 (_latestValue != null && _latestValue.volume > 0)
                     ? Icons.volume_up
                     : Icons.volume_off,
+                color: Colors.white,
               ),
             ),
           ),
@@ -271,6 +274,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         ),
         child: Icon(
           controller.value.isPlaying ? Icons.pause : Icons.play_arrow,
+          color: Colors.white,
         ),
       ),
     );
@@ -290,6 +294,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         '${formatDuration(position)} / ${formatDuration(duration)}',
         style: TextStyle(
           fontSize: 14.0,
+          color: Colors.white
         ),
       ),
     );
