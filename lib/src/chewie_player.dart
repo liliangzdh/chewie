@@ -132,6 +132,12 @@ class ChewieState extends State<Chewie> {
   }
 }
 
+
+enum UiType {
+  MaterialUI,
+  CupertinoUI,
+}
+
 /// The ChewieController is used to configure and drive the Chewie Player
 /// Widgets. It provides methods to control playback, such as [pause] and
 /// [play], as well as methods that control the visual appearance of the player,
@@ -143,6 +149,7 @@ class ChewieState extends State<Chewie> {
 /// player, please use the standard information provided by the
 /// `VideoPlayerController`.
 class ChewieController extends ChangeNotifier {
+
   ChewieController({
     this.videoPlayerController,
     this.aspectRatio,
@@ -162,12 +169,15 @@ class ChewieController extends ChangeNotifier {
     this.allowFullScreen = true,
     this.allowMuting = true,
     this.systemOverlaysAfterFullScreen = SystemUiOverlay.values,
+    this.androidUiType,
+    this.iosUiType,
     this.deviceOrientationsAfterFullScreen = const [
       DeviceOrientation.portraitUp,
       DeviceOrientation.portraitDown,
       DeviceOrientation.landscapeLeft,
       DeviceOrientation.landscapeRight,
     ],
+
   }) : assert(videoPlayerController != null,
             'You must provide a controller to play a video') {
     _initialize();
@@ -231,6 +241,11 @@ class ChewieController extends ChangeNotifier {
 
   /// Defines if the mute control should be shown
   final bool allowMuting;
+
+  ///确定 使用什么类型
+  final UiType androidUiType;
+  final UiType iosUiType;
+
 
   /// Defines the system overlays visible after exiting fullscreen
   final List<SystemUiOverlay> systemOverlaysAfterFullScreen;

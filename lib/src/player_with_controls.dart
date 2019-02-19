@@ -44,10 +44,44 @@ class PlayerWithControls extends StatelessWidget {
           ),
           chewieController.overlay ?? Container(),
           _buildControls(context, chewieController),
+//          _buildHeader(context,"assa"),
         ],
       ),
     );
   }
+
+//  final barHeight = 48.0;
+//  final lightColor = Color.fromRGBO(255, 255, 255, 0.85);
+//  final darkColor = Color.fromRGBO(1, 1, 1, 0.35);
+//
+//  AnimatedOpacity _buildHeader(BuildContext context, String title) {
+//    return AnimatedOpacity(
+//      opacity: _hideStuff ? 0.0 : 1.0,
+//      opacity: 1.0,
+//      duration: Duration(milliseconds: 300),
+//      child: Container(
+//        color: Colors.black.withOpacity(0.5),
+//        height: barHeight,
+//        child: Row(
+//          crossAxisAlignment: CrossAxisAlignment.center,
+//          children: <Widget>[
+//            IconButton(
+//              onPressed: () {},
+//              color: lightColor,
+//              icon: Icon(Icons.chevron_left),
+//            ),
+//            Text(
+//              '返回',
+//              style: TextStyle(
+//                color: lightColor,
+//                fontSize: 18.0,
+//              ),
+//            ),
+//          ],
+//        ),
+//      ),
+//    );
+//  }
 
   Widget _buildControls(
     BuildContext context,
@@ -57,11 +91,18 @@ class PlayerWithControls extends StatelessWidget {
         ? chewieController.customControls != null
             ? chewieController.customControls
             : Theme.of(context).platform == TargetPlatform.android
-                ? MaterialControls()
-                : CupertinoControls(
-                    backgroundColor: Color.fromRGBO(41, 41, 41, 0.7),
-                    iconColor: Color.fromARGB(255, 200, 200, 200),
-                  )
+                ? (chewieController.androidUiType == UiType.CupertinoUI
+                    ? CupertinoControls(
+                        backgroundColor: Color.fromRGBO(41, 41, 41, 0.7),
+                        iconColor: Color.fromARGB(255, 200, 200, 200),
+                      )
+                    : MaterialControls())
+                : (chewieController.iosUiType == UiType.MaterialUI
+                    ? MaterialControls()
+                    : CupertinoControls(
+                        backgroundColor: Color.fromRGBO(41, 41, 41, 0.7),
+                        iconColor: Color.fromARGB(255, 200, 200, 200),
+                      ))
         : Container();
   }
 

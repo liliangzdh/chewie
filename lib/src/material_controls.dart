@@ -41,6 +41,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         absorbing: _hideStuff,
         child: Column(
           children: <Widget>[
+            _buildHeader(context, "qwqw"),
             _latestValue != null &&
                         !_latestValue.isPlaying &&
                         _latestValue.duration == null ||
@@ -53,6 +54,46 @@ class _MaterialControlsState extends State<MaterialControls> {
                 : _buildHitArea(),
             _buildBottomBar(context),
           ],
+        ),
+      ),
+    );
+  }
+
+  final lightColor = Color.fromRGBO(255, 255, 255, 0.85);
+  final darkColor = Color.fromRGBO(1, 1, 1, 0.35);
+
+  AnimatedOpacity _buildHeader(BuildContext context, String title) {
+    return AnimatedOpacity(
+      opacity: _hideStuff ? 0.0 : 1.0,
+      duration: Duration(milliseconds: 300),
+      child: GestureDetector(
+        onTapUp: (_) {
+          if (chewieController.isFullScreen) {
+            _onExpandCollapse();
+          } else {
+            stop();
+            Navigator.of(context).pop();
+          }
+        },
+        child: Container(
+          color: Colors.black.withOpacity(0.5),
+          height: barHeight,
+          child: Row(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Icon(
+                Icons.chevron_left,
+                color: Colors.white,
+              ),
+              Text(
+                '返回',
+                style: TextStyle(
+                  color: lightColor,
+                  fontSize: 18.0,
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
@@ -95,7 +136,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       duration: Duration(milliseconds: 300),
       child: Container(
         height: barHeight,
-        color: Theme.of(context).dialogBackgroundColor,
+        color: Colors.black.withOpacity(0.5),
         child: Row(
           children: <Widget>[
             _buildPlayPause(controller),
@@ -291,6 +332,12 @@ class _MaterialControlsState extends State<MaterialControls> {
         });
       });
     });
+  }
+
+  void stop() {
+    _hideStuff = false;
+    _hideTimer?.cancel();
+    controller.pause();
   }
 
   void _playPause() {
