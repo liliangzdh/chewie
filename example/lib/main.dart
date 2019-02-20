@@ -32,6 +32,11 @@ class _ChewieDemoState extends State<ChewieDemo> {
     super.initState();
     _videoPlayerController1 = VideoPlayerController.network(
         'https://vod.kaoyaya.com/3ba827e5fc1e4802b15c4758c3181d68/a713c75721e847daae72bfff7f5c11df-4b6ffae84f2e1d243955ecaedcf11a3e.m3u8');
+
+    _videoPlayerController1.addListener(() {
+      print("------position:" +
+          _videoPlayerController1.value.position.inMilliseconds.toString());
+    });
     _videoPlayerController2 = VideoPlayerController.network(
         'https://www.sample-videos.com/video123/mp4/480/big_buck_bunny_480p_20mb.mp4');
     _chewieController = ChewieController(
@@ -84,7 +89,7 @@ class _ChewieDemoState extends State<ChewieDemo> {
                   children: <Widget>[
                     Chewie(
                       controller: _chewieController,
-                    )
+                    ),
                   ],
                 ),
               ),

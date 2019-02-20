@@ -58,6 +58,10 @@ class _VideoProgressBarState extends State<MaterialVideoProgressBar> {
       controller.seekTo(position);
     }
 
+
+//    print("------>"+controller.value.duration.toString());
+//    print("------>lib:"+controller.value.position.toString());
+
     return GestureDetector(
       child: (controller.value.hasError)
           ? Text(controller.value.errorDescription)
