@@ -40,16 +40,16 @@ class _ChewieDemoState extends State<ChewieDemo> {
       aspectRatio: 3 / 2,
       autoPlay: true,
       looping: true,
-      iosUiType: UiType.MaterialUI ,
+      iosUiType: UiType.MaterialUI,
       // Try playing around with some of these other options:
 
       // showControls: false,
-       materialProgressColors: ChewieProgressColors(
-         playedColor: Colors.redAccent,
-         handleColor: Colors.redAccent,
-         backgroundColor: Colors.grey,
-         bufferedColor: Colors.lightGreen,
-       ),
+      materialProgressColors: ChewieProgressColors(
+        playedColor: Colors.redAccent,
+        handleColor: Colors.redAccent,
+        backgroundColor: Colors.grey,
+        bufferedColor: Colors.lightGreen,
+      ),
       // placeholder: Container(
       //   color: Colors.grey,
       // ),
@@ -73,15 +73,19 @@ class _ChewieDemoState extends State<ChewieDemo> {
         platform: _platform ?? Theme.of(context).platform,
       ),
       home: Scaffold(
-        appBar: AppBar(
-          title: Text(widget.title),
-        ),
+//        appBar: AppBar(
+//          title: Text(widget.title),
+//        ),
         body: Column(
           children: <Widget>[
             Expanded(
-              child: Center(
-                child: Chewie(
-                  controller: _chewieController,
+              child: Container(
+                child: Column(
+                  children: <Widget>[
+                    Chewie(
+                      controller: _chewieController,
+                    )
+                  ],
                 ),
               ),
             ),

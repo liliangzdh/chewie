@@ -78,6 +78,7 @@ class _MaterialControlsState extends State<MaterialControls> {
         child: Container(
           color: Colors.black.withOpacity(0.5),
           height: barHeight,
+          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
           child: Row(
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
