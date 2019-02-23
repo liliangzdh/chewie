@@ -40,6 +40,8 @@ class _MaterialControlsState extends State<MaterialControls> {
       child: AbsorbPointer(
         absorbing: _hideStuff,
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             _buildHeader(context, "qwqw"),
             _latestValue != null &&
@@ -75,28 +77,49 @@ class _MaterialControlsState extends State<MaterialControls> {
             Navigator.of(context).pop();
           }
         },
-        child: Container(
-          color: Colors.black.withOpacity(0.5),
-          height: barHeight,
-          margin: EdgeInsets.only(top: MediaQuery.of(context).padding.top),
-          child: Row(
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: <Widget>[
-              Icon(
-                Icons.chevron_left,
-                color: Colors.white,
-                size: 30,
-              ),
-              Text(
-                '返回',
-                style: TextStyle(
-                  color: lightColor,
-                  fontSize: 18.0,
+        child: chewieController.isFullScreen
+            ? Container(
+                color: Colors.black.withOpacity(0.5),
+                height: barHeight,
+                margin:
+                    EdgeInsets.only(top: MediaQuery.of(context).padding.top),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  children: <Widget>[
+                    Icon(
+                      Icons.chevron_left,
+                      color: Colors.white,
+                      size: 30,
+                    ),
+                    Text(
+                      '返回',
+                      style: TextStyle(
+                        color: lightColor,
+                        fontSize: 18.0,
+                      ),
+                    ),
+                  ],
                 ),
+              )
+            : Container(
+                alignment: AlignmentDirectional.centerStart,
+                child: FlatButton(
+                    onPressed: () {
+                      Navigator.of(context).pop();
+                    },
+                    color: Colors.black87,
+                    highlightColor: Colors.black87,
+                    shape: CircleBorder(),
+                    padding: EdgeInsets.only(right: 0),
+                    child: Icon(
+                      Icons.arrow_back,
+                      color: Colors.white,
+                    )),
+                width: 40,
+                height: 40,
+                margin: EdgeInsets.only(
+                    top: MediaQuery.of(context).padding.top, left: 10),
               ),
-            ],
-          ),
-        ),
       ),
     );
   }
@@ -293,10 +316,7 @@ class _MaterialControlsState extends State<MaterialControls> {
       padding: EdgeInsets.only(right: 24.0),
       child: Text(
         '${formatDuration(position)} / ${formatDuration(duration)}',
-        style: TextStyle(
-          fontSize: 14.0,
-          color: Colors.white
-        ),
+        style: TextStyle(fontSize: 14.0, color: Colors.white),
       ),
     );
   }
@@ -306,7 +326,8 @@ class _MaterialControlsState extends State<MaterialControls> {
     _startHideTimer();
 
     setState(() {
-      _hideStuff = false;
+//      _hideStuff = false;
+      _hideStuff = !_hideStuff;
     });
   }
 
